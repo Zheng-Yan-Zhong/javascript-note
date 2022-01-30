@@ -6,16 +6,16 @@
 而變數需要被宣告(declare)並且告知編譯器
 
 * 宣告方法
-    * var
-    * let
-    * const
+  * var
+  * let
+  * const
 
 宣告temp變數
-```javascript=
+```javascript
 var temp
 ```
 賦予其數值
-```javascript=
+```javascript
 var temp = "hello world!!!"
 ```
 > JavaScript中我們不需要定義變數的資料型態(ex: string...)
@@ -32,7 +32,7 @@ var temp = "hello world!!!"
 * 可先宣告不給予初始值
 * 全域變數
 
-```javascript=
+```javascript
 var temp
 
 var temp = 10
@@ -53,12 +53,12 @@ let為JavaScript(ES6)版本新增的變數宣告方法
 
 var造成開發問題
 
-```javascript=
+```javascript
 var text = "Hello world";
 var text = "What";
 ```
 
-```javascript=
+```javascript
 let text;
 let text;
 //SyntaxError: Identifier 'text' has already been declared
@@ -70,19 +70,19 @@ let text;
 * 不可宣告而不給予數值
 
 未給予初始值
-```javascript=
+```javascript
 const text;
 //SyntaxError: Missing initializer in const declaration
 ```
 
 重複宣告其變數
-```javascript=
+```javascript
 const text = '1';
 const text = '1';
 //SyntaxError: Identifier 'text' has already been declared
 ```
 更改其數值
-```javascript=
+```javascript
 const text = '1';
 text = '2';
 //TypeError: Assignment to constant variable.
@@ -91,21 +91,21 @@ text = '2';
 以下sum方法我們不會再更改其宣告內容
 
 這時候確保sum是唯獨(read only)可保持開發流程的品質
-```javascript=
+```javascript
 const sum = (a,b) => {
     return a + b
 }
 ```
 
 更改陣列內容 為[5,7,3]
-```javascript=
+```javascript
 const array = [2,5,7]
 array = [5,7,3] //error
 ```
 可以發現array被const定義唯獨
 
 我們可以使用更改index值
-```javascript=
+```javascript
 array[0] = 5
 array[1] = 7
 array[2] = 3
@@ -124,17 +124,17 @@ array[2] = 3
     * function
 
 ### String
-```javascript=
+```javascript
 var text = String("Hello World")
 
 var text = "Hello World"
 ```
 #### Single quotes
-```javascript=
+```javascript
 var text = 'Hello World'
 ```
 #### Double quotes
-```javascript=
+```javascript
 var text = "Hello World"
 ```
 
@@ -153,19 +153,19 @@ var text = "Hello World"
 
 
 錯誤示範
-```javascript=
+```javascript
 var text = "Hello world "I am Ian""
 ```
 
 使用跳脫字元 `\" `  +  `\"`
-```javascript=
+```javascript
 var text = "Hello world \"I am Ian\"."
 ```
 
 ---
 
 ### Number
-```javascript=
+```javascript
 var price = Number(100)
 
 var price = 100
@@ -175,7 +175,7 @@ var price = 100
 
 ### Undefined
     未被賦值之變數
-```javascript=
+```javascript
 var value
 console.log(value) //undefined
 ```
@@ -191,7 +191,7 @@ console.log(value) //undefined
 
 ### NaN
     NaN(Not a Number),通常非數值而做運算時,即被賦值NaN
-```javascript=
+```javascript
 var value = "我是中文"
 const result = value / 100
 console.log(result);// NaN
@@ -200,7 +200,7 @@ console.log(result);// NaN
 ---
 
 ### Array
-```javascript=
+```javascript
 var temp = Array(1,2,3)
 
 var temp = [1,2,3]
@@ -208,7 +208,7 @@ var temp = [1,2,3]
 
 ### Object
 * `property : value`
-```javascript=
+```javascript
 var user = Object({name: "Ian", age: 22})
 
 var user = {
@@ -218,7 +218,7 @@ var user = {
 
 ```
 取得屬性
-```javascript=
+```javascript
 var user = {
     name: "Ian",
     age: 22
@@ -231,7 +231,7 @@ console.log(result)//Ian
 
 新增屬性
 
-```javascript=
+```javascript
 user.email = "test@gmail.com"
 
 user["email"] = "test@gmail.com"
@@ -248,7 +248,7 @@ user["email"] = "test@gmail.com"
 * arrow function (ES6)
 * keyWord `return`
 
-```javascript=
+```javascript
 //declare
 function sum(a,b) {
     return a + b
@@ -271,7 +271,7 @@ const sun = (a,b) => {
 ```
 
 #### Return
-```javascript=
+```javascript
 const sum = (a,b) => {
     console.log(a+b)
 }
@@ -292,7 +292,7 @@ console.log(result) //16
 
 #### Parameter
 
-```javascript=
+```javascript
 function shallow(n1,n2,n3) {
     const mix = [n1,n2,n3]
     console.log(mix);
@@ -304,7 +304,7 @@ shallow(20,30,40)
     * 過多、參數傳遞問題
     * 更簡短語法
 
-```javascript=
+```javascript
 function shallowCP(...args) {
     console.log(args);//[ 20, 30, 40 ]
     console.log(args.forEach((item) => console.log(item)))
@@ -323,21 +323,21 @@ shallowCP(20,30,40)
 
 `++`
 
-```javascript=
+```javascript
 let number = 10
 number++
 console.log(number);//11
 ```
 `--`
 
-```javascript=
+```javascript
 let number = 10
 number--
 console.log(number);
 ```
 
 `reference ++`
-```javascript=
+```javascript
 let temp = 10;
 let value = temp++;
 console.log(value,temp); //10 11
@@ -345,7 +345,7 @@ console.log(value,temp); //10 11
 ```
 
 `reference --`
-```javascript=
+```javascript
 let temp = 10;
 let value = temp--;
 console.log(value,temp);10 9
@@ -354,7 +354,7 @@ console.log(value,temp);10 9
 
 那我們要怎麼依照原來的寫法正確傳遞呢？
 
-```javascript=
+```javascript
 let temp = 10;
 let value = ++temp;
 // or
@@ -375,7 +375,7 @@ JavaScript傳遞以下類型資料時,都是淺參考(shallow reference)
 * Null
 * NaN
 
-```javascript=
+```javascript
 let number = 2
 console.log(number * number);    //4
 console.log(number ** number);   //4
@@ -399,14 +399,14 @@ console.log(number % number);    //0
 * Equal
     * `==` 
         使用` ==`  (自動轉型,不嚴謹的比對)
-        ```javascript=
+        ```javascript
         let str = "12"
         console.log(str == 12) //true
         ```
     * `===`
 
         使用`===` (嚴謹比對資料型態)
-        ```javascript=
+        ```javascript
         let str = "12"
         console.log(str === 12)// false
         ```
@@ -453,7 +453,7 @@ console.log(number % number);    //0
     console.log(result)//false
     ```
     * `!==`
-    ```javascipt
+    ```javascript
     const result = 1 !== "1"
     console.log(result)//true
     ```
@@ -465,7 +465,7 @@ console.log(number % number);    //0
 
 `if`
 
-    ```javascript=
+    ```javascript
     function compare(value) {
         if(value > 6) {
             return `over the ${value}` 
@@ -477,7 +477,7 @@ console.log(number % number);    //0
     
 `switch`
 
-    ```javascript=
+    ```javascript
     function compare(value) {
         switch(value) {
             case "1":
@@ -496,38 +496,38 @@ console.log(number % number);    //0
 * replace
 
 ### slice
-```javascript=
+```javascript
 var text = "Hello world"
 console.log(text.slice(0,3)) //Hel
 ```
 ### substring
-```javascript=
+```javascript
 var text = "Hello world"
 console.log(text.substring(3,8)) //lo wo
 ```
 ### substr
-```javascript=
+```javascript
 var text = "Hello world"
 console.log(text.substr(3,4)) //lo wo
 ```
 ### replace
-```javascript=
+```javascript
 var text = "台灣新北市中和區"
 var concat = text.replace("台灣", "中華民國")
 console.log(concat);// 中華民國新北市中和區
 ```
 ### toLowerCase
-```javascript=
+```javascript
 var text = "Hello World"
 console.log(text.toLowerCase()) //hello world
 ```
 ### toUpperCase
-```javascript=
+```javascript
 var text = "Hello World"
 console.log(text.toUpperCase()) //HELLO WORLD
 ```
 ### split
-```javascript=
+```javascript
 var text = "Hello%World"
 console.log(text.split('%')) //[ 'Hello', 'World' ]
 ```
@@ -539,7 +539,7 @@ console.log(text.split('%')) //[ 'Hello', 'World' ]
 
 
 ### indexOf
-```javascript=
+```javascript
 var text = "Hello World"
 console.log(text.indexOf('o')) //4
 ```
@@ -563,13 +563,13 @@ console.log(text.indexOf('o')) //4
 * foreach
 
 ### toString
-```javascript=
+```javascript
  var temp = [1,2,3,4,5,6,7,8]
 console.log(temp.toString())//1,2,3,4,5,6,7,8
 ```
 
 ### concat
-```javascript=
+```javascript
 var a = [1,2,3,4,5,6,7,8]
 var b = [10,12]
 console.log(a.concat(b))
@@ -577,13 +577,13 @@ console.log(a.concat(b))
 ```
 
 ### length
-```javascript=
+```javascript
 var a = [1,2,3,4,5,6,7,8]
 console.log(a.length)//8
 ```
 
 ### pop
-```javascript=
+```javascript
 var a = [1,2,3,4,5,6,7,8]
 a.pop()
 console.log(a)
@@ -596,7 +596,7 @@ console.log(a)
 ```
 
 ### push
-```javascript=
+```javascript
 var a = [1,2,3,4,5,6,7,8]
 a.push(9)
 console.log(a)
@@ -609,7 +609,7 @@ console.log(a)
 ```
 
 ### shift
-```javascript=
+```javascript
 var a = [1,2,3,4,5,6,7,8]
 a.shift()
 console.log(a)
@@ -622,7 +622,7 @@ console.log(a)
 ```
 
 ### unshift
-```javascript=
+```javascript
 var a = [1,2,3,4,5,6,7,8]
 a.unshift(9)
 console.log(a)
@@ -635,7 +635,7 @@ console.log(a)
 ```
 
 ### map
-```javascript=
+```javascript
 var a = [1,2,3,4,5,6,7,8]
 console.log(a.map(function(item) {
     return item * 2
@@ -648,7 +648,7 @@ console.log(a.map(function(item) {
 ```
 
 ### filter
-```javascript=
+```javascript
 var a = [1,2,3,4,5,6,7,8]
 console.log(a.filter(function(item) {
     return item > 2
@@ -657,7 +657,7 @@ console.log(a.filter(function(item) {
 ```
 
 ### some
-```javascript=
+```javascript
 var a = [1,2,3,4,5,6,7,8]
 console.log(a.some(function(item) {
     return item > 2
@@ -666,7 +666,7 @@ console.log(a.some(function(item) {
 ```
 
 ### every
-```javascript=
+```javascript
 var a = [1,2,3,4,5,6,7,8]
 console.log(a.every(function(item) {
     return item > 2
@@ -675,7 +675,7 @@ console.log(a.every(function(item) {
 ```
 
 ### forEach
-```javascript=
+```javascript
 var a = [1,2,3,4,5,6,7,8]
 console.log(a.forEach(function(item) {
     console.log(item);  
@@ -698,7 +698,7 @@ console.log(a.forEach(function(item) {
 
 ### freeze
 freeze可以達成const的唯獨效果,避免物件被更改屬性值
-```javascript=
+```javascript
 function freezeObj() {
   const MATH_CONSTANTS = {
     PI: 3.14
@@ -718,7 +718,7 @@ const PI = freezeObj();//3.14
 ```
 
 ### hasOwnProperty
-```javascript=
+```javascript
 const user = {
     name: "Ian",
     age: 22
@@ -734,7 +734,7 @@ console.log(checkResult) //true
 我們先了解JavaScript使用array或是object都是call by reference
 
 ### object
-```javascript=
+```javascript
 const user = {
     name: 'Ian',
     age: 22
@@ -744,7 +744,7 @@ console.log(name, age); //Ian 22
 ```
 
 rename the parameter
-```javascript=
+```javascript
 const user = {
     name: 'Ian',
     age: 22
@@ -753,7 +753,7 @@ const {age: user_age} = user
 console.log(user_age)//22
 ```
 ### nested object
-```javascript=
+```javascript
 const user = {
     about: {
         email: "test@gmail.com",
@@ -766,20 +766,20 @@ console.log(user_email);//test@gmail.com
 ```
 
 ### array
-```javascript=
+```javascript
 const array = [1,2,3]
 const [a,b,c] = array
 console.log(a,b,c); //1, 2, 3
 ```
 解構過少
-```javascript=
+```javascript
 const array = [1,2,3]
 const [a,b] = array
 console.log(a,b); //1, 2
 ```
 
 解構過多
-```javascript=
+```javascript
 const array = [1,2,3]
 const [a,b,c,d] = array
 console.log(a,b,c,d); //1, 2, 3 undefined
@@ -791,13 +791,13 @@ React中取用useState也是使用此方法
 const [user, setUser] = useState(initialize)
 ```
 ### nested array
-```javascript=
+```javascript
 const array = [["dog","cat"], ["Apple", "banana"]]
 const value = array[0[1]]
 console.log(value)//cat
 ```
 ### function 
-```javascript=
+```javascript
 const user = {
     name: "Ian",
     age: 22
@@ -810,7 +810,7 @@ test(user)//Ian 22
 ```
 
 ### swap
-```javascript=
+```javascript
 const arr = [1,2,3]
 const [a,b,c] = arr
 [a,c,b] = [a,b,c]
@@ -818,7 +818,7 @@ console.log(a,b,c)//1,3,2
 ```
 ### shallow copy 
 也就是當我執行以下操作,兩個參數牽一髮而動全身
-```javascript=
+```javascript
 const arr1 = [1,2,3]
 const arr2 = arr1;
 arr2.push(100)
@@ -828,7 +828,7 @@ console.log(arr1,arr2)//[1,2,3,100][1,2,3,100]
 
 我們可以使用`...`來取得數值,也可以稱為shallow copy
 
-```javascript=
+```javascript
 const arr1 = [1,2,3]
 const arr2 = [...arr1];
 arr2.push(100)
@@ -836,7 +836,7 @@ console.log(arr1,arr2);//[ 1, 2, 3 ] [ 1, 2, 3, 100 ]
 ```
 
 function parameter
-```javascript=
+```javascript
 function shallow(n1,n2,n3) {
     const mix = [n1,n2,n3]
     console.log(mix);
@@ -889,7 +889,7 @@ shallowCP(20,30,40)
     * `getter`、`setter`
 
 
-```javascript=
+```javascript
 // Only change code below this line
 class Vegetable {
   constructor(para) {
@@ -910,7 +910,7 @@ console.log(carrot.name); // Should display 'carrot'
 
 ## Set
 * `new Set`
-```javascript=
+```javascript
 const array1 = [1,2,3]
 const array2 = [10,2,1]
 
@@ -924,7 +924,7 @@ console.log(result);//{ 1, 2, 3, 10 }
 ## Regular Expression
 ### test
 * return `true` 、`false`
-```javascript=
+```javascript
 let words = "Hello I am Ian"
 let keyword = /I/
 let result = keyword.test(words)
@@ -934,7 +934,7 @@ console.log(result);//true
 * return `array`
 
 
-```javascript=
+```javascript
 let extractStr = "Extract the word 'coding' from this string.";
 let codingRegex = /coding/; 
 let result = extractStr.match(codingRegex); 
@@ -961,7 +961,7 @@ console.log(result);
 
 
  use `|`
-```javascript=
+```javascript
 let words = "apple banana guava"
 let keyword = /cat|apple/
 let result = keyword.test(words)
@@ -971,7 +971,7 @@ console.log(result);//true
 use `i`
 
 我們可以看到正則表達式確實回報錯誤
-```javascript=
+```javascript
 let words = "Apple"
 let keyword = /apple/
 let result = keyword.test(words)
@@ -979,7 +979,7 @@ console.log(result);//false
 ```
 但如果今天我要確認使用者有這個單字,不論大、小寫
 
-```javascript=
+```javascript
 let words = "Apple"
 let keyword = /apple/i
 let result = keyword.test(words)
@@ -987,7 +987,7 @@ console.log(result);//true
 ```
 
 use `[range]`
-```javascript=
+```javascript
 let quoteSample = "Blueberry 3.141592653s are delicious.";
 let myRegex = /[h-s2-6]/gi; 
 let result = quoteSample.match(myRegex); 
@@ -1013,7 +1013,7 @@ let result = quoteSample.match(myRegex);
 ```
 
 `^` 檢查字首
-```javascript=
+```javascript
 let quoteSample = "3 blind mice.";
 let myRegex = /[^aeiou^0-9]/gi; 
 let result = quoteSample.match(myRegex); 
@@ -1022,7 +1022,7 @@ console.log(result)
 ```
 
 `*`
-```javascript=
+```javascript
 const str =  "Booooooooooo Booo boooooo"
 const reg =  /Bo*/gi
 result = str.match(reg)
@@ -1031,7 +1031,7 @@ console.log(result);
 ```
 
 `?`
-```javascript=
+```javascript
 const str =  "Booooooooooo Booo boooooo"
 const reg =  /Bo?/gi
 result = str.match(reg)
@@ -1066,7 +1066,7 @@ Babel是使JavaScript可以靈活運用且持續活躍的功臣之一
 ![](https://i.imgur.com/FDf02Kt.png)
 > sourse by https://www.programiz.com/javascript/recursion
 
-```javascript=
+```javascript
 function recursion(num) { 
     if(num == 0) {
         return ""
