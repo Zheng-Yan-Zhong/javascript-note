@@ -1,14 +1,35 @@
 # JavaScript Tutorial
 
+## Table of Contents
+
+* [Declaration](#Declaration)
+* [Variables](#Variables)
+* [Data Type](#Data-Type)
+* [Operator](#Opertor)
+* [Comparation](#Comparation)
+* [Conditional](#Conditional)
+* [String methods](#String-methods)
+* [Array methods](#Array-methods)
+* [Object methods](#Object-methods)
+* [Date](#Date)
+* [Destructing](#Destructing)
+* [Scope Chain](#Scope-Chain)
+* [Closure](#Closure)
+* [Asychronous](#Asynchronous)
+* [Prototype](#Prototype)
+* [Class](#Class)
+* [Import/Export](#Import--Export)
+
+[⬆️ Back to Contents](#Table-of-Contents)
 ## Declaration
 變數(variable),我們可以稱為儲存資料的盒子
 
 而變數需要被宣告(declare)並且告知編譯器
 
 * 宣告方法
-  * var
-  * let
-  * const
+    * var
+    * let
+    * const
 
 宣告temp變數
 ```javascript
@@ -110,6 +131,9 @@ array[0] = 5
 array[1] = 7
 array[2] = 3
 ```
+---
+
+[⬆️ Back to Contents](#Table-of-Contents)
 
 ## Data Type
 * Call by value
@@ -239,7 +263,7 @@ user["email"] = "test@gmail.com"
 
 
 ---
-
+[⬆️ Back to Contents](#Table-of-Contents)
 
 ### Function
 * declaration function
@@ -314,6 +338,10 @@ function shallowCP(...args) {
 }
 shallowCP(20,30,40)
 ```
+---
+
+[⬆️ Back to Contents](#Table-of-Contents)
+
 ## Operator
 運算子在程式語言中(不限任何語言)都是十分重要
 
@@ -382,6 +410,10 @@ console.log(number ** number);   //4
 console.log(number / number);    //1
 console.log(number % number);    //0
 ```
+
+---
+
+[⬆️ Back to Contents](#Table-of-Contents)
 
 ## Comparation
 
@@ -453,42 +485,48 @@ console.log(number % number);    //0
     console.log(result)//false
     ```
     * `!==`
-    ```javascript
+    ```javascipt
     const result = 1 !== "1"
     console.log(result)//true
     ```
 ---
 
+[⬆️ Back to Contents](#Table-of-Contents)
+
 ## Conditional
+
 * `if` 、 `else if` 、`else`
 * `switch` 
 
 `if`
 
-    ```javascript
-    function compare(value) {
-        if(value > 6) {
-            return `over the ${value}` 
-        } else {
-            return `under the ${value}`
-        }
+```javascript
+function compare(value) {
+    if(value > 6) {
+        return `over the ${value}` 
+    } else {
+        return `under the ${value}`
     }
-    ```
-    
+}
+```
+
 `switch`
 
-    ```javascript
-    function compare(value) {
-        switch(value) {
-            case "1":
-                return 1
-        
-            default:
-                return -1
-        } 
-    }
-    ```
+```javascript
+function compare(value) {
+    switch(value) {
+        case "1":
+            return 1
+
+        default:
+            return -1
+    } 
+}
+```
 ---
+
+[⬆️ Back to Contents](#Table-of-Contents)
+
 ## String methods
 * slice(start, end)
 * substring(start, end)
@@ -545,6 +583,8 @@ console.log(text.indexOf('o')) //4
 ```
 
 ----
+
+[⬆️ Back to Contents](#Table-of-Contents)
 
 ## Array methods
 * toString
@@ -692,6 +732,10 @@ console.log(a.forEach(function(item) {
 */
 ```
 
+---
+
+[⬆️ Back to Contents](#Table-of-Contents)
+
 ## Object methods
 * hasOwnProperty
 * freeze
@@ -717,6 +761,7 @@ function freezeObj() {
 const PI = freezeObj();//3.14
 ```
 
+
 ### hasOwnProperty
 ```javascript
 const user = {
@@ -727,9 +772,16 @@ const checkResult = user.hasOwnProperty("name")
 console.log(checkResult) //true
 ```
 
+---
+
+[⬆️ Back to Contents](#Table-of-Contents)
+
 ## Date
 
 ---
+
+[⬆️ Back to Contents](#Table-of-Contents)
+
 ## Destructing
 我們先了解JavaScript使用array或是object都是call by reference
 
@@ -854,7 +906,14 @@ function shallowCP(...args) {
 shallowCP(20,30,40)
 ```
 
+---
+
+[⬆️ Back to Contents](#Table-of-Contents)
+
 ## Scope Chain
+
+
+
 
 ### Global Scope
 
@@ -862,14 +921,19 @@ shallowCP(20,30,40)
 
 ---
 
+[⬆️ Back to Contents](#Table-of-Contents)
+
 ## Closure
 
 ---
+
+[⬆️ Back to Contents](#Table-of-Contents)
 
 ## Asynchronous
 * Callback
 * Promise(ES6)
 * Async / Await
+
 
 ### Callback
 
@@ -878,6 +942,15 @@ shallowCP(20,30,40)
 ### Async / Await
 
 ---
+
+[⬆️ Back to Contents](#Table-of-Contents)
+
+## Prototype
+
+---
+
+[⬆️ Back to Contents](#Table-of-Contents)
+
 ## Class
 * `prototype sugar syntax`
 * `keywords`
@@ -902,11 +975,19 @@ const carrot = new Vegetable('carrot');
 console.log(carrot.name); // Should display 'carrot'
 ```
 
+---
+
+[⬆️ Back to Contents](#Table-of-Contents)
+
 ## Import / Export 
 ### ES6 Modules
 
 ### Common JS
 
+
+---
+
+[⬆️ Back to Contents](#Table-of-Contents)
 
 ## Set
 * `new Set`
