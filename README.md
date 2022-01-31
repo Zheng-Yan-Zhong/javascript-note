@@ -1333,6 +1333,35 @@ outputData()
 [⬆️ Back to Contents](#Table-of-Contents)
 
 ## Prototype
+JavaScript中有所謂的建構函數和prototype(原型)達成類似class的效果
+* `prototype`
+* `__proto__`
+
+我們先建立一個User的constructor function
+```javascript
+function User(name, age) {
+    this.name = name;
+    this.age = age
+}
+
+const user = new User("Ian", 22)
+```
+
+目前User本身沒有method可以使用
+
+我們使用prototype給予method
+
+```javascript
+User.prototype.sayHI = function() {
+    console.log(`My name is ${this.name} `);
+}
+
+user.sayHI()//My name is Ian 
+```
+
+把user打印出來可以發現prototype指向我們所`參考`的物件
+
+![](images/proto_js.png)
 
 ---
 
