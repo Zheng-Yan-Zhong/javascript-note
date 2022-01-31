@@ -1,11 +1,15 @@
-# JavaScript Tutorial
+# JavaScript-Note
+首先很感謝大家觀看我筆記,如果有什麼需要修正的請issue給我
+
+或是 `Email` : `ococo09000@gmail.com`
+
 
 ## Table of Contents
 
 * [Declaration](#Declaration)
 * [Variables](#Variables)
 * [Data Type](#Data-Type)
-* [Operator](#Opertor)
+* [Operator](#Operator)
 * [Comparation](#Comparation)
 * [Conditional](#Conditional)
 * [String methods](#String-methods)
@@ -15,12 +19,13 @@
 * [Destructing](#Destructing)
 * [Scope Chain](#Scope-Chain)
 * [Closure](#Closure)
+* [Callback](#Callback)
 * [Asychronous](#Asynchronous)
 * [Prototype](#Prototype)
 * [Class](#Class)
 * [Import/Export](#Import--Export)
 
-[⬆️ Back to Contents](#Table-of-Contents)
+
 ## Declaration
 變數(variable),我們可以稱為儲存資料的盒子
 
@@ -40,6 +45,10 @@ var temp
 var temp = "hello world!!!"
 ```
 > JavaScript中我們不需要定義變數的資料型態(ex: string...)
+
+---
+
+[⬆️ Back to Contents](#Table-of-Contents)
 
 ## Variables
 * var
@@ -911,19 +920,162 @@ shallowCP(20,30,40)
 [⬆️ Back to Contents](#Table-of-Contents)
 
 ## Scope Chain
+Scope其實就是定義一個區塊,只能內層存取,也可以稱為最小暴露原則
+* 優勢
+    * 減少命名衝突
+    * 達到暴露最少原則
+    * 避免污染全域變數
+* 區塊範圍
+    * `function scope`
+    * `block scope`
+    * `global`
+* scope chain
+    * 呼叫之變數、函式在哪個作用域
+
+`函式管理`
+
+```javascript
+function scope() {
+    let str = "Hello world!";
+    console.log(str);
+}
+
+scope()// Hello World
+console.log(str)// undefined
+```
 
 
+`模組化管理`
 
+```javascript
+let sayModule = {
+    sayHello: function(str) {console.log(str)} ,
+    sayGoodbye: function(str) {console.log(str)}
+}
+sayModule.sayHello(1)
+```
 
-### Global Scope
+`迴圈`
+```javascript
+console.log(`globla a: ${a}`);//undefined
+for(var a = 0; a < 10; a++) {
+    setTimeout(() => {
+        console.log(a)
+        //10
+        //10
+        //10...
+    },2000)
+}
+console.log(a); //10
+```
 
-### Local Scope
+我們可以發現其實迴圈並沒有自己的block
+
+導致a直接污染global,最後非同步函式只會抓到最後stack(堆疊好的)
+`var a = 10 a < 10 `再依序執行就是每次都抓到10的數值
+
+而解法我們可以使用
+* `let`
+* `IIFE(Immediately invoked function expression)`
+
+```javascript
+for(let a = 0; a < 10; a++) {
+    setTimeout(() => {
+        console.log(a);
+    },1000)
+    //1
+    //2
+    //3...
+}
+```
+
+最後我們要來解釋 `scope chain`
+
+* `呼叫之變數、函式在哪個作用域`
+
+```javascript
+var name = "Ian"
+a()//Ian
+
+function a() {
+    var name = "Dennis"
+    b()
+}
+function b() {
+    console.log(name)
+}
+```
+
+我們可以發現因為fucntion b被呼叫在global,於是自然而然取得的變數是global name
+
 
 ---
 
 [⬆️ Back to Contents](#Table-of-Contents)
 
 ## Closure
+其實專有名稱只是在形容特定使用情形,而我就是常常把scope chain中的function scope和closure搞混
+
+* clsure
+    * 使用指向另一個function之方式傳遞
+    * 避免被垃圾回收機制回收,達到繼續存取指向變數
+    * 最小曝露原則
+
+先來看scope chain的原理
+
+scope chain是指`語彙範疇`
+```javascript
+let name = "Ian" //Ian
+a()
+function a() {
+    let name = "Dennis"
+    b()
+}
+function b() {
+    console.log(name);
+}
+```
+
+而`closure`是存取指向之變數
+```javascript
+function a() {
+    let count = 0
+    return function b() {
+        count++;
+        console.log(count);
+        return count
+    }
+}
+
+const result = a()
+result()//1
+result()//2
+```
+
+就這樣？？？
+
+沒錯的 很多專有名詞只是看起來“很難”而已！！！
+
+
+---
+
+[⬆️ Back to Contents](#Table-of-Contents)
+
+## Callback
+由於JavaScript是使用者響應語言
+
+常常實作時,我們需要監聽使用者是否點擊按鈕
+
+而點擊按鈕響應的事件就是使用callback執行
+* 回調之參數
+* 解決step by step
+
+```javascript
+function buttonEvent(callback) {
+    callback()
+}
+```
+
 
 ---
 
@@ -1162,12 +1314,6 @@ console.log(result);
 /*10
 9
 8
-7
-6
-5
-4
-3
-2
-1
+7...
 */
 ```
