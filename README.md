@@ -9,6 +9,7 @@
 * [Declaration](#Declaration)
 * [Variables](#Variables)
 * [Data Type](#Data-Type)
+* [Arrow function](#Arrow-function)
 * [Operator](#Operator)
 * [Comparation](#Comparation)
 * [Conditional](#Conditional)
@@ -347,6 +348,73 @@ function shallowCP(...args) {
 }
 shallowCP(20,30,40)
 ```
+---
+
+[⬆️ Back to Contents](#Table-of-Contents)
+
+## Arrow function
+
+不帶參數之函式
+```javascript
+function sayHello() {
+    console.log("hello");
+}
+const sayHello_Two = () => {
+    console.log("hello");
+}
+
+sayHello()
+sayHello_Two()
+```
+
+而如果函式只有一行,可以把大括號省略
+
+```javascript
+const sayHello_Two = () => console.log("hello")
+```
+
+帶參數的arrow function
+
+```javascript
+const sayHello_Two = (a,b) => a + b
+const value = sayHello_Two(2,4)
+console.log(value)//6
+```
+
+```javascript
+let user = {
+    name: "Ian",
+    say: function() {
+        console.log(this.name);
+    },
+    sayArr: () => console.log(this.name)
+}
+
+user.say() //Ian
+user.sayArr() //undefined
+```
+
+
+
+```javascript
+class User {
+    constructor(name) {
+        this.name = name
+    }
+    
+    sayHiFunction() {
+        console.log(this)
+    }
+    sayHiArrow = () => console.log(this);
+}
+
+let user = new User("Dennis")
+user.sayHiArrow()// class User
+user.sayHiFunction()//class User
+```
+
+
+
 ---
 
 [⬆️ Back to Contents](#Table-of-Contents)
@@ -1076,6 +1144,94 @@ function buttonEvent(callback) {
 }
 ```
 
+下列的示範我們可以更了解
+
+我要先執行
+1. wash hands
+2. eat dinner
+3. studying
+
+```javascript=
+function todo(callback) {
+    console.log("studying")
+    callback
+}
+
+function eat(callback) {
+    console.log("eat dinner")
+    callback
+}
+
+function study() {
+    console.log("wash hands")
+}
+
+todo(eat(study()))
+/*
+studying
+eat dinner
+wash hands
+*/
+```
+
+如何使用callback取得資料
+
+```javascript
+function buttonEvent(callback) {
+    let result = 2
+    callback(result)
+}
+
+
+const getData = (data) => {
+    let value = data
+    console.log("value is: " + value );
+}
+
+buttonEvent(getData)
+```
+
+我們來小實踐平常一些 API 的 callback
+
+我們要來寫個自己開發的小功能
+* data接受三個參數 (number, array , callback)
+* callback可以取得完成後的陣列,跟原始陣列
+
+```javascript
+function data(num, arr, callback) {
+    let result = [...arr]
+    arr.push(num)
+    callback(result, arr)
+} 
+
+function getData(data, oldData) {
+    console.log(`data: ${data}, the oldData ${oldData}`);
+}
+let number = 100
+let array = [1,2,3]
+data(number, array, getData)
+//data: 1,2,3, the oldData 1,2,3,100
+```
+
+如果我們只想取得最新的陣列就好,原始陣列不需要取得
+
+也就是callback只需要一個參數取得即可
+
+```javascript
+function data(num, arr, callback) {
+    let result = [...arr]//shallow copy array
+    arr.push(num)
+    callback(result, arr)
+} 
+
+function getData(data) {
+    console.log(`data: ${data}`);
+}
+let number = 100
+let array = [1,2,3]
+data(number, array, getData)
+// data: 1,2,3
+```
 
 ---
 
@@ -1088,11 +1244,90 @@ function buttonEvent(callback) {
 
 
 ### Callback
+1. wash hands
+2. eat dinner
+3. studying
+
+```javascript=
+function todo(callback) {
+    console.log("studying")
+    callback
+}
+
+function eat(callback) {
+    console.log("eat dinner")
+    callback
+}
+
+function study() {
+    console.log("wash hands")
+}
+
+todo(eat(study()))
+/*
+studying
+eat dinner
+wash hands
+*/
+```
 
 ### Promise
+* `ES6新增之語法`
+* `callback(resolve, reject)`
+* `status`
+    * `pendding`
+    * `resolve`
+    * `reject` 
+* `action` 都是負責接收promise
+    * `then 接受一個 callback(res)`
+    * `catch 抓住 reject 並且接受一個callback(error)`
+
+在上面callback的例子,相信不難發現如果callback越來越多就會難以閱讀
+```javascript
+todo(eat(study(todo(eat(study())))))
+```
+
+而我們使用promise取代callback
+
+```javascript
+function getStatus() {
+    return new Promise(function(resolve, reject) {
+    let num = true
+    if(num) {
+        resolve("Success status: 200")
+    } 
+    reject("Error status: 500")
+})
+}
+
+const result = getStatus()
+console.log(result);// Promise { 'Success status: 200' }
+
+result.then(function(response){
+    console.log(response); //Success status: 200
+})
+
+result.catch((error) => console.log(error))
+```
 
 ### Async / Await
+* `promise語法糖,跟promise是互相搭配`
+* `async定義function`
+* `await等待promise`
+```javascript=
+function getStatus() {
+    return new Promise(function(resolve, reject) {
+        // ...block
+    }
+}
 
+async function outputData() {
+    let data = await getStatus()
+    let result = await data.json()
+    return result
+}
+outputData()
+```
 ---
 
 [⬆️ Back to Contents](#Table-of-Contents)
