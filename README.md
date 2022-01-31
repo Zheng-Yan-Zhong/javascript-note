@@ -1151,7 +1151,7 @@ function buttonEvent(callback) {
 2. eat dinner
 3. studying
 
-```javascript=
+```javascript
 function todo(callback) {
     console.log("studying")
     callback
@@ -1248,7 +1248,7 @@ data(number, array, getData)
 2. eat dinner
 3. studying
 
-```javascript=
+```javascript
 function todo(callback) {
     console.log("studying")
     callback
@@ -1314,7 +1314,9 @@ result.catch((error) => console.log(error))
 * `promise語法糖,跟promise是互相搭配`
 * `async定義function`
 * `await等待promise`
-```javascript=
+
+
+```javascript
 function getStatus() {
     return new Promise(function(resolve, reject) {
         // ...block
@@ -1362,6 +1364,27 @@ user.sayHI()//My name is Ian
 把user打印出來可以發現prototype指向我們所`參考`的物件
 
 ![](images/proto_js.png)
+
+### `prototype chain`
+
+我們可以使用`__proto__`
+
+```javascript
+function User(name, age) {
+    this.name = name;
+    this.age = age
+}
+
+const user = new User("Ian", 22)
+
+User.prototype.sayHI = function() {
+    console.log(`My name is ${this.name} `);
+}
+
+user.sayHI()//My name is Ian 
+console.log(user.__proto__ === User.prototype); //true
+```
+![](images/__proto__.png)
 
 ---
 
