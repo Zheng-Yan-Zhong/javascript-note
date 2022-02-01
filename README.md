@@ -1631,19 +1631,6 @@ console.log(data);
 
 [⬆️ Back to Contents](#Table-of-Contents)
 
-## Set
-* `new Set`
-```javascript
-const array1 = [1,2,3]
-const array2 = [10,2,1]
-
-function setFunction(arr1, arr2) {
-    return new Set(arr1.concat(arr2))
-}
-const result = setFunction(array1,array2)
-console.log(result);//{ 1, 2, 3, 10 }
-```
-
 ## Regular Expression
 ### test
 * return `true` 、`false`
@@ -1764,46 +1751,4 @@ console.log(result);
 
 ---
 
-## JavaScript Package
-* Babel
-
-### Babel
-[Babel offcial](https://babeljs.io/)
-
-Babel是使JavaScript可以靈活運用且持續活躍的功臣之一
-
-當瀏覽器看不懂最新發布的JavaScript stntax時,Babel可以轉換成較舊版本的語法
-
-## Advanced Data
-此章節為學習JavaScript特殊用法而額外拉出來之章節,
-內也有FreeCodeCamp之課程筆記
-
----
-
-
-
-### Recursive function
-遞迴(Recursion)其實就是呼叫自己
-
-主要切入點是把大問題分成小問題
-![](https://i.imgur.com/FDf02Kt.png)
-> sourse by https://www.programiz.com/javascript/recursion
-
-```javascript
-function recursion(num) { 
-    if(num == 0) {
-        return ""
-    } else {
-        console.log(num);
-        return recursion(num -1)
-    }
-}
-const result = recursion(10)
-console.log(result);
-
-/*10
-9
-8
-7...
-*/
-```
+[⬆️ Back to Contents](#Table-of-Contents)
