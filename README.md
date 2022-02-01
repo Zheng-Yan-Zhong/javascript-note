@@ -1074,7 +1074,7 @@ function b() {
 }
 ```
 
-我們可以發現因為fucntion b被呼叫在global,於是自然而然取得的變數是global name
+我們可以發現因為function b被定義在global,於是自然而然無論在何處呼叫,取得的變數都是global name
 
 
 ---
@@ -1199,9 +1199,9 @@ buttonEvent(getData)
 
 ```javascript
 function data(num, arr, callback) {
-    let result = [...arr]
+    let copyArr = [...arr]
     arr.push(num)
-    callback(result, arr)
+    callback(arr, copyArr)
 } 
 
 function getData(data, oldData) {
@@ -1210,7 +1210,7 @@ function getData(data, oldData) {
 let number = 100
 let array = [1,2,3]
 data(number, array, getData)
-//data: 1,2,3, the oldData 1,2,3,100
+//data: 1,2,3,100 , the oldData: 1,2,3
 ```
 
 如果我們只想取得最新的陣列就好,原始陣列不需要取得
@@ -1400,18 +1400,127 @@ console.log(user.__proto__ === User.prototype); //true
     * `static`
     * `getter`、`setter`
 
+首先我們定義一個class User
 
 ```javascript
-// Only change code below this line
-class Vegetable {
-  constructor(para) {
-    this.name = para
-  }
+class User{
+    
 }
-// Only change code above this line
+```
 
-const carrot = new Vegetable('carrot');
-console.log(carrot.name); // Should display 'carrot'
+定義其建構子
+
+```javascript
+class User {
+    constructor(name, age, email) {
+        this.name = name;
+        this.age = age;
+        this.email = email;
+    }
+}
+```
+
+給予class User method
+
+```javascript
+class User {
+    constructor(name, age, email) {
+        this.name = name;
+        this.age = age;
+        this.email = email;
+    }
+    
+    sayHi() {
+        console.log(`Helo I'm ${this.name}`)
+    }
+}
+```
+
+使用 `new` 建構
+
+```javascript
+const user = new User("Dennis", 22, "test@gmail.com")
+
+user.sayHi()//Helo I'm Dennis
+```
+
+而為什麼會說class其實是原型的語法糖
+
+我們把user打印出來看看
+
+![](images/class.png)
+
+本質還是使用原型的方式,只是如果本身有學習過OOP的話,ES6的語法更親近不少
+
+`extends` 
+物件導向會需要繼承類別達到目的
+```javascript
+class User {
+    constructor(name, age, email) {
+        this.name = name;
+        this.age = age;
+        this.email = email;
+    }
+    
+    sayHi() {
+        console.log(`Helo I'm ${this.name}`)
+    }
+}
+
+class copyUser extends User {
+    constructor(name, age, email, background) {
+        this.background = background;
+        super(name, age, email);
+        
+    }
+    intro() {
+        console.log(`I'm ${this.name} graduated from ${this.background} and ${this.age} old`);
+    }
+}
+```
+而事實上 這樣是錯誤的
+> ReferenceError: Must call super constructor in derived class before accessing 'this' or returning from derived constructor
+
+錯誤報告說function super也就是幫助我們繼承類別的屬性時,function super必須在本身的屬性之上
+ 
+```javascript
+class copyUser extends User {
+    constructor(name, age, email, background) {
+        super(name, age, email);
+        this.background = background;
+    }
+    intro() {
+        console.log(`I'm ${this.name} graduated from ${this.background} and ${this.age} old`);
+    }
+}
+```
+
+恭喜！！！ 我們已經學會基本的繼承跟類別了
+
+`static`
+
+static很間單易了,只要在類別方法前面加上`static`即可只讓類別本身使用
+
+
+
+```javascript
+class copyUser extends User {
+    constructor(name, age, email, background) {
+        super(name, age, email);
+        this.background = background;
+        //ReferenceError: Must call super constructor in derived class before accessing 'this' or returning from derived constructor
+    }
+    static say() {
+        console.log("static");
+    }
+    intro() {
+        console.log(`I'm ${this.name} graduated from ${this.background} and ${this.age} old`);
+    }
+}
+
+const user = new copyUser('Dennis', 22, "test@gmail.com", "JINWAN")
+copyUser.say()//static
+user.say()//user.say is not a function
 ```
 
 ---
@@ -1419,10 +1528,104 @@ console.log(carrot.name); // Should display 'carrot'
 [⬆️ Back to Contents](#Table-of-Contents)
 
 ## Import / Export 
-### ES6 Modules
+在以前JavaScript並不需要分割成太多的檔案,但現在功能越多越複雜,全部攪在一起會導致維護困難
+
+於是JavaScript有了多樣化的檔案匯入方式
+* Common JS(Node.js)
+* ES6 module(官方統一標準)
+
 
 ### Common JS
+* `Keywords`
+    * `module`
+    * `exports`
+    * `require`
 
+
+```javascript
+// commonEx.js
+module.exports.data = {
+    value: 2,
+}
+module.exports.fuc = function (params) {
+    console.log("Hello commonJS");
+}
+
+//commonIm.js
+const result = require('./commonEx')
+console.log(result);
+//{ data: { value: 2 }, fuc: [Function (anonymous)] }
+```
+
+### ES6 Modules
+* `keywords`
+    * `import` 
+    * `export`
+    * `default`
+    * `fileName.mjs`
+
+我們先來看如果在沒有package安裝套件的情況下,檔名沒有更改成`.mjs`
+```javascript
+//esExport.js
+const data = {
+    value: 2
+}
+
+const sayHi = function() {
+    console.log("Hello ES6");
+}
+
+export{
+    data, sayHi
+}
+
+
+//esImport.js
+import {data, sayHi} from './esExport.js'
+console.log(data);
+//Error: Cannot find module '/Users/zhengyanzhong/Note-JS/modules/esImport.mjs'
+```
+
+更改成`.mjs`
+
+```javascript
+//esExport.mjs
+const data = {
+    value: 2
+}
+
+const sayHi = function() {
+    console.log("Hello ES6");
+}
+
+export{
+    data, sayHi
+}
+//esImport.mjs
+import {data, sayHi} from './esExport.mjs'
+console.log(data);
+//{ value: 2 }
+```
+
+如果我們只有匯出一個模組,可以使用`default`設為該檔的預設
+
+```javascript
+
+//esExport.mjs
+const data = {
+    value: 2
+}
+export default data
+```
+
+import 即可不加大括號
+
+```javascript
+//esImport.mjs
+import data from './esExport.mjs'
+console.log(data);
+//{ value: 2 }
+```
 
 ---
 
