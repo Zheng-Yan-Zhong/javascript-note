@@ -1631,6 +1631,38 @@ console.log(data);
 
 [⬆️ Back to Contents](#Table-of-Contents)
 
+## Fetch
+[MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+
+```javascript
+  async function register(event) {
+    event.preventDefault()
+    await fetch('http://localhost:3001/register', {
+      headers: {
+        'Content-Type':'application/json', 
+      }, 
+      method: "POST",
+      body: JSON.stringify({
+        userName: user.userName,
+        passWord: user.passWord,
+        email: user.email,
+        country: user.country
+      })})    
+    alert('successful')
+    setUser({...user,
+      userName: "",
+      passWord: "",
+      email: "",
+      country: "Taiwan"
+    })
+    router('/user/signin')
+  }
+```
+
+---
+
+[⬆️ Back to Contents](#Table-of-Contents)
+
 ## Regular Expression
 ### test
 * return `true` 、`false`
