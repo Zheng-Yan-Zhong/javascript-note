@@ -1,11 +1,14 @@
 function getStatus() {
     return new Promise(function(resolve, reject) {
-    let num = true
-    if(num) {
-        resolve("Success status: 200")
-    } 
-    reject("Error status: 500")
-})
+    let num = false
+    setTimeout(() => {
+        num = true
+        if(num) {
+            resolve("Success status: 200")
+        } 
+        reject("Error status: 500")
+        }, 2000)
+    })
 }
 
 const result = getStatus()

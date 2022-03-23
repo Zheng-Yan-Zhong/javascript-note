@@ -1,32 +1,24 @@
 # JavaScript-Note
-首先很感謝大家觀看我筆記,如果有什麼需要修正的請issue給我
+> 首先很感謝大家觀看我筆記,如果有什麼需要修正的請issue
 
-或是 `Email` : `ococo09000@gmail.com`
+>或是 `e-mail` : `ococo09000@gmail.com`
 
+---
 
 ## Table of Contents
-
 * [Declaration](#Declaration)
 * [Variables](#Variables)
 * [Data Type](#Data-Type)
-* [Arrow function](#Arrow-function)
-* [Operator](#Operator)
-* [Comparation](#Comparation)
-* [Conditional](#Conditional)
+* [Operators](#Operators)
+* [ES6](#ES6)
 * [String methods](#String-methods)
 * [Array methods](#Array-methods)
 * [Object methods](#Object-methods)
-* [Date](#Date)
-* [Destructing](#Destructing)
 * [Scope Chain](#Scope-Chain)
 * [Closure](#Closure)
 * [Callback](#Callback)
-* [Asychronous](#Asynchronous)
 * [Prototype](#Prototype)
-* [Class](#Class)
-* [Import/Export](#Import--Export)
-
-
+* [Regular-Expression](#Regular-Expression)
 ## Declaration
 變數(variable),我們可以稱為儲存資料的盒子
 
@@ -208,7 +200,7 @@ var price = 100
 ---
 
 ### Undefined
-    未被賦值之變數
+未被賦值之變數
 ```javascript
 var value
 console.log(value) //undefined
@@ -239,6 +231,8 @@ var temp = Array(1,2,3)
 
 var temp = [1,2,3]
 ```
+
+---
 
 ### Object
 * `property : value`
@@ -271,9 +265,7 @@ user.email = "test@gmail.com"
 user["email"] = "test@gmail.com"
 ```
 
-
 ---
-[⬆️ Back to Contents](#Table-of-Contents)
 
 ### Function
 * declaration function
@@ -304,7 +296,9 @@ const sun = (a,b) => {
 }
 ```
 
-#### Return
+---
+
+### Return
 ```javascript
 const sum = (a,b) => {
     console.log(a+b)
@@ -324,291 +318,394 @@ const result = value * value
 console.log(result) //16
 ```
 
-#### Parameter
-
-```javascript
-function shallow(n1,n2,n3) {
-    const mix = [n1,n2,n3]
-    console.log(mix);
-}
-
-shallow(20,30,40)
-```
-* shallow好處
-    * 過多、參數傳遞問題
-    * 更簡短語法
-
-```javascript
-function shallowCP(...args) {
-    console.log(args);//[ 20, 30, 40 ]
-    console.log(args.forEach((item) => console.log(item)))
-    //20
-    //30
-    //40
-}
-shallowCP(20,30,40)
-```
 ---
-
 [⬆️ Back to Contents](#Table-of-Contents)
 
-## Arrow function
+## Operators
+* [Assignment operator](#assignment-operator)
+* [Logic operator](#logic-operator)
+* [Arithmetic operators](#arithmetic-operator)
 
-不帶參數之函式
-```javascript
-function sayHello() {
-    console.log("hello");
-}
-const sayHello_Two = () => {
-    console.log("hello");
-}
+### Assignment operator
+| 運算子 | 描述 | 例子 | 結果 |
+| ------ | ------ | ------| ------ |
+| (equal) == | 回傳 true or false| 1 == "1" | true|
+| (equal) === | 比對是否同資料類型及數值 | 1 === "1" | false |
+| (not equal to) != | 比對是否不等於數值 | 1 != "1" | false | 
+| (not equal to) !== | 比對是否不等於同資料類型及數值 | 1 !== "1" | true |
+| (more than) > | 大於| 1 > 1| false|
+| (more than equal to) >= | 大於等於| 1 >= 1| true | 
+| (less than) < | 小於| 1 < 1| false |
+| (less than not equal to) <= | 小於等於| 1 <= 1| true |
 
-sayHello()
-sayHello_Two()
-```
+---
+[⬆️ Back to Opeatators](#operators)
 
-而如果函式只有一行,可以把大括號省略
+### Logic operator
+| 運算子 | 描述 | 例子 | 結果 |
+| ------ | ------ | ------ | ------|
+| (and)&& | 當條件1成立便會執行條件2, 但當條件1就不符合,即回傳條件1 | undefined && true| undefined|
+| (or) \|\| | 任意條件成立便執行,但若都為不成立則執行條件2 | NaN \|\| 10 | 10 |
+| (not) ! | 反轉該數值 | x = false, !x == true | true|
 
-```javascript
-const sayHello_Two = () => console.log("hello")
-```
+---
+[⬆️ Back to Opeatators](#operators)
 
-帶參數的arrow function
+### Arithmetic operator
+| 運算子 | 描述| 例子 | 結果 | 
+| ------ | ------ | ------ | ------ |
+| (mod) % | 取餘數 | 10 % 2 | 0 |
+| (increase) ++ | 先賦值再遞增| x = 10, result = x++  | result = 10, x = 11|
+| ++ | 先遞增再賦值| x = 10, result = ++x | result = 11, x = 11 |
+| (decrease) -- | 先賦值再遞減| x = 10, result = x--| result = 10, x = 9||
+| -- | 先遞減再賦值| x = 10, result = --x| result = 9, x = 9|
+| (cube)** | 該數的立方 | 3 ** 5| 243|
+---
+[⬆️ Back to Opeatators](#operators) [⬆️ Back to Contents](#table-of-contents)
 
-```javascript
-const sayHello_Two = (a,b) => a + b
-const value = sayHello_Two(2,4)
-console.log(value)//6
-```
+## ES6
+JavaScript ECMAScript 2015(ES6) 是非常重要的版本,由於ES6解決了之前版本的痛點,促使了JS擺脫之前的業障.
 
-```javascript
-let user = {
-    name: "Ian",
-    say: function() {
-        console.log(this.name);
-    },
-    sayArr: () => console.log(this.name)
-}
+* [Class](#class)
+* [Modules](#modules)
+* [Destructing](#destructing)
+* [Parameter](#parameter)
+* [Promise](#promise)
+* [Fetch](#fetch)
 
-user.say() //Ian
-user.sayArr() //undefined
-```
+---
 
-
+## Class
+* 原型的語法糖
+* 能狗解決物件導向寫法
+* `keywords`
+  * class
+  * constructor
+  * super
+  * extends
+  * static
 
 ```javascript
 class User {
-    constructor(name) {
+    constructor(name, age, sex) {
         this.name = name
+        this.age = age,
+        this.sex = sex
     }
-    
-    sayHiFunction() {
-        console.log(this)
-    }
-    sayHiArrow = () => console.log(this);
-}
 
-let user = new User("Dennis")
-user.sayHiArrow()// class User
-user.sayHiFunction()//class User
-```
-
-
-
----
-
-[⬆️ Back to Contents](#Table-of-Contents)
-
-## Operator
-運算子在程式語言中(不限任何語言)都是十分重要
-
-打好基本功,會讓後面學習更得心應手
-
-
-
-`++`
-
-```javascript
-let number = 10
-number++
-console.log(number);//11
-```
-`--`
-
-```javascript
-let number = 10
-number--
-console.log(number);
-```
-
-`reference ++`
-```javascript
-let temp = 10;
-let value = temp++;
-console.log(value,temp); //10 11
-//先給予參考本身再遞增數值
-```
-
-`reference --`
-```javascript
-let temp = 10;
-let value = temp--;
-console.log(value,temp);10 9
-//先給予參考本身在遞減數值
-```
-
-那我們要怎麼依照原來的寫法正確傳遞呢？
-
-```javascript
-let temp = 10;
-let value = ++temp;
-// or
-let value += temp;
-console.log(value,temp);//11 11
-//把運算子放在前方,算好數值變數value才取得參考
-```
-
-這邊的觀念其實也是JavaScript本身運作的原理,
-
-JavaScript傳遞以下類型資料時,都是淺參考(shallow reference)
-
-也就是只傳遞數值,與Array, Object的原理不同
-
-* Number
-* String
-* Undefined
-* Null
-* NaN
-
-```javascript
-let number = 2
-console.log(number * number);    //4
-console.log(number ** number);   //4
-console.log(number / number);    //1
-console.log(number % number);    //0
-```
-
----
-
-[⬆️ Back to Contents](#Table-of-Contents)
-
-## Comparation
-
-
-| syntax | expression | ouput |
-| -------- | -------- | -------       | 
-| ==    | 1 == "1"      | true| 
-| ===   | 1 === "1"     |false|
-| \| \|  | result = 1 \|\| 2| 1|
-| &&    | result = 1 && 2| 2|
-| !=     | 1 != "1"        | false |
-| !==    | 1 !== "1"      | true |
-| >=| 1 >= "1"| true|
-| <=| 1 <= "1" | false|
-* Equal
-    * `==` 
-        使用` ==`  (自動轉型,不嚴謹的比對)
-        ```javascript
-        let str = "12"
-        console.log(str == 12) //true
-        ```
-    * `===`
-
-        使用`===` (嚴謹比對資料型態)
-        ```javascript
-        let str = "12"
-        console.log(str === 12)// false
-        ```
-
-* Or
-    ```javascript
-    const result = false || true
-    console.log(result)//true
-
-    const result = true || false
-    console.log(result)// true
-    ```
-
-* And
-    * `&`
-        自動轉型
-        ```javascript
-        const result = true & false
-        console.log(result)//0
-        const result = false & true
-        console.log(result)//0
-        const result = true & true
-        console.log(result)//1
-        ```
-
-    * `&&`
-
-        嚴格比對
-        ```javascript
-        const result = true && false
-        console.log(result);//false
-
-        const result = false && true
-        console.log(result)//false
-
-        const result = true && true
-        console.log(result)//true
-        ```
-* Not Equal
-
-    * `!=`
-    ```javascript
-    const result = 1 != "1"
-    console.log(result)//false
-    ```
-    * `!==`
-    ```javascipt
-    const result = 1 !== "1"
-    console.log(result)//true
-    ```
----
-
-[⬆️ Back to Contents](#Table-of-Contents)
-
-## Conditional
-
-* `if` 、 `else if` 、`else`
-* `switch` 
-
-`if`
-
-```javascript
-function compare(value) {
-    if(value > 6) {
-        return `over the ${value}` 
-    } else {
-        return `under the ${value}`
+    sayHi() {
+        console.log(`Hi, I'm ${this.name} `)
     }
 }
 ```
-
-`switch`
+extends是繼承類別,而super是繼承建構子
 
 ```javascript
-function compare(value) {
-    switch(value) {
-        case "1":
-            return 1
+class User {
+    constructor(name, age, sex) {
+        this.name = name
+        this.age = age,
+        this.sex = sex
+    }
+}
 
-        default:
-            return -1
+class UserCopy extends User{
+    constructor(name, age, sex, email){
+        super(name, age, sex)
+        this.email = email
+    }
+}
+```
+---
+[⬆️ Back to ES6](#es6)
+
+## Modules
+在以前JavaScript並不需要分割成太多的檔案,前端發展日益蓬勃,全部攪在一起會導致維護困難.
+
+於是JavaScript有了多樣化的檔案匯入方式
+* Common JS(Node.js)
+* ES6 module(官方統一標準)
+
+## Common JS
+* `Keywords`
+    * `module`
+    * `exports`
+    * `require`
+
+
+```javascript
+// commonEx.js
+module.exports.data = {
+    value: 2,
+}
+module.exports.fuc = function (params) {
+    console.log("Hello commonJS");
+}
+
+//commonIm.js
+const result = require('./commonEx')
+console.log(result);
+//{ data: { value: 2 }, fuc: [Function (anonymous)] }
+```
+---
+
+## ES6 Modules
+* `keywords`
+    * `import` 
+    * `export`
+    * `default`
+    * `fileName.mjs`
+
+我們先來看如果在沒有package安裝套件的情況下,檔名沒有更改成`.mjs`
+```javascript
+//esExport.js
+const data = {
+    value: 2
+}
+
+const sayHi = function() {
+    console.log("Hello ES6");
+}
+
+export{
+    data, sayHi
+}
+
+
+//esImport.js
+import {data, sayHi} from './esExport.js'
+console.log(data);
+//Error: Cannot find module '/Users/zhengyanzhong/Note-JS/modules/esImport.mjs'
+```
+
+更改成`.mjs`
+
+```javascript
+//esExport.mjs
+const data = {
+    value: 2
+}
+
+const sayHi = function() {
+    console.log("Hello ES6");
+}
+
+export{
+    data, sayHi
+}
+//esImport.mjs
+import {data, sayHi} from './esExport.mjs'
+console.log(data);
+//{ value: 2 }
+```
+
+如果我們只有匯出一個模組,可以使用`default`設為該檔的預設
+
+```javascript
+
+//esExport.mjs
+const data = {
+    value: 2
+}
+export default data
+```
+
+import 即可不加大括號
+
+```javascript
+//esImport.mjs
+import data from './esExport.mjs'
+console.log(data);
+//{ value: 2 }
+```
+---
+[⬆️ Back to ES6](#es6)
+
+## Destructing
+* 使用`[ ]`中括號解構陣列
+* 使用`{ } `大括號解構物件
+* 使用`...`淺複製(shallow copy)
+
+
+陣列解構
+```javascript
+const array = ["1", "2", "3"]
+const [a,b] = array
+console.log(a,b)// 1, 2
+```
+
+陣列使用shallow copy
+```javascript
+const array = ["1", "2", "3"]
+const [a,...b] = array
+console.log(a, b)//1, ["2","3"]
+```
+物件解構
+```javascript
+const object = {
+    name: 'Ian',
+    age: 23
+}
+const { name, age } = object
+console.log(name, age);// Ian, 23
+```
+物件使用shallow copy
+```javascript
+const object = {
+    name: 'Ian',
+    age: 23,
+    email: 'test@gmail.com'
+}
+const { name, ...age } = object
+console.log(name, age);// Ian, { age: 23, email: 'test@gmail.com' }
+```
+---
+[⬆️ Back to ES6](#es6)
+
+## Parameter
+
+```javascript
+function sayHi(...args) {
+    console.log(args)
+    //[ 'Ian', 22, 'test@gmail.com' ]
+    args.forEach((item, index) => console.log(index+1 + '.', item))
+}
+sayHi("Ian", 22, "test@gmail.com")
+/*
+1. Ian
+2. 22
+3. test@gmail.com
+*/
+```
+---
+[⬆️ Back to ES6](#es6)
+
+## Promise
+* 解決使用callback難易閱讀
+* status
+  * pedding
+  * fulfill
+  * reject
+* `then`、`catch` 抓回回傳的promise
+* method
+  * Promise.all([Promise array])
+
+```javascript
+function getStatus() {
+    return new Promise(function(resolve, reject) {
+    let num = true
+    if(num) {
+        resolve("Success status: 200")
     } 
+    reject("Error status: 500")
+})
 }
+
+const result = getStatus()
+console.log(result);// Promise { 'Success status: 200' }
+result.then(function(response){
+    console.log(response); //Success status: 200
+})
+result.catch((error) => console.log(error))
+```
+
+我們使用`setTimeout`來演練抓取後端資料時pedding的狀態
+
+```javascript
+function getStatus() {
+    return new Promise(function(resolve, reject) {
+    let num = false
+    setTimeout(() => {
+        num = true
+        if(num) {
+            resolve("Success status: 200")
+        } 
+        reject("Error status: 500")
+        }, 2000)
+    })
+}
+
+const result = getStatus()
+console.log(result);// Promise { 'Success status: 200' }
+result.then(function(response){
+    console.log(response); //Success status: 200
+})
+result.catch((error) => console.log(error))
+```
+![](gif/timeoutPromise.gif)
+---
+[⬆️ Back to ES6](#es6) 
+
+## Fetch
+
+```javascript
+// Example POST method implementation:
+async function postData(url = '', data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
+
+postData('https://example.com/answer', { answer: 42 })
+  .then(data => {
+    console.log(data); // JSON data parsed by `data.json()` call
+  });
+
+```
+
+實際使用mongoose演練一下
+
+```javascript
+  async function register(event) {
+    event.preventDefault()
+    await fetch('http://localhost:3001/register', {
+      headers: {
+        'Content-Type':'application/json', 
+      }, 
+      method: "POST",
+      body: JSON.stringify({
+        userName: user.userName,
+        passWord: user.passWord,
+        email: user.email,
+        country: user.country
+      })})    
+    alert('successful')
+    setUser({...user,
+      userName: "",
+      passWord: "",
+      email: "",
+      country: "Taiwan"
+    })
+    router('/user/signin')
+  }
 ```
 ---
-
-[⬆️ Back to Contents](#Table-of-Contents)
+[⬆️ Back to ES6](#es6) [⬆️ Back to Contents Tables](#table-of-contents)
 
 ## String methods
+* includes
 * slice(start, end)
 * substring(start, end)
 * substr(start, length)
 * replace
+
+### includes
+```javascript
+const string = 'abcde'
+console.log(string.toLowerCase().includes("a"));//true
+```
 
 ### slice
 ```javascript
@@ -647,21 +744,13 @@ var text = "Hello%World"
 console.log(text.split('%')) //[ 'Hello', 'World' ]
 ```
 
----
-
-## String search
-* indexOf
-
-
 ### indexOf
 ```javascript
 var text = "Hello World"
 console.log(text.indexOf('o')) //4
 ```
-
 ----
-
-[⬆️ Back to Contents](#Table-of-Contents)
+[⬆️ Back to String](#string-methods) [⬆️ Back to Contents](#Table-of-Contents)
 
 ## Array methods
 * toString
@@ -811,7 +900,7 @@ console.log(a.forEach(function(item) {
 
 ---
 
-[⬆️ Back to Contents](#Table-of-Contents)
+[⬆️ Back to Array methods](#array-methods) [⬆️ Back to Contents](#Table-of-Contents)
 
 ## Object methods
 * hasOwnProperty
@@ -850,141 +939,6 @@ console.log(checkResult) //true
 ```
 
 ---
-
-[⬆️ Back to Contents](#Table-of-Contents)
-
-## Date
-
----
-
-[⬆️ Back to Contents](#Table-of-Contents)
-
-## Destructing
-我們先了解JavaScript使用array或是object都是call by reference
-
-### object
-```javascript
-const user = {
-    name: 'Ian',
-    age: 22
-}
-const {name, age} = user
-console.log(name, age); //Ian 22
-```
-
-rename the parameter
-```javascript
-const user = {
-    name: 'Ian',
-    age: 22
-}
-const {age: user_age} = user
-console.log(user_age)//22
-```
-### nested object
-```javascript
-const user = {
-    about: {
-        email: "test@gmail.com",
-        link: "a"
-    },
-    age: "22"
-}
-const { about: { email: user_email }} = user 
-console.log(user_email);//test@gmail.com
-```
-
-### array
-```javascript
-const array = [1,2,3]
-const [a,b,c] = array
-console.log(a,b,c); //1, 2, 3
-```
-解構過少
-```javascript
-const array = [1,2,3]
-const [a,b] = array
-console.log(a,b); //1, 2
-```
-
-解構過多
-```javascript
-const array = [1,2,3]
-const [a,b,c,d] = array
-console.log(a,b,c,d); //1, 2, 3 undefined
-```
-
-
-React中取用useState也是使用此方法
-```jsx=
-const [user, setUser] = useState(initialize)
-```
-### nested array
-```javascript
-const array = [["dog","cat"], ["Apple", "banana"]]
-const value = array[0[1]]
-console.log(value)//cat
-```
-### function 
-```javascript
-const user = {
-    name: "Ian",
-    age: 22
-}
-
-function test({name, age}) {
-    console.log(name,age)
-}
-test(user)//Ian 22
-```
-
-### swap
-```javascript
-const arr = [1,2,3]
-const [a,b,c] = arr
-[a,c,b] = [a,b,c]
-console.log(a,b,c)//1,3,2
-```
-### shallow copy 
-也就是當我執行以下操作,兩個參數牽一髮而動全身
-```javascript
-const arr1 = [1,2,3]
-const arr2 = arr1;
-arr2.push(100)
-console.log(arr1,arr2)//[1,2,3,100][1,2,3,100] 
-```
-但我只是想複製一份來做額外的操作
-
-我們可以使用`...`來取得數值,也可以稱為shallow copy
-
-```javascript
-const arr1 = [1,2,3]
-const arr2 = [...arr1];
-arr2.push(100)
-console.log(arr1,arr2);//[ 1, 2, 3 ] [ 1, 2, 3, 100 ]
-```
-
-function parameter
-```javascript
-function shallow(n1,n2,n3) {
-    const mix = [n1,n2,n3]
-    console.log(mix);
-}
-
-shallow(20,30,40)//[ 20, 30, 40 ]
-
-function shallowCP(...args) {
-    console.log(args);//[ 20, 30, 40 ]
-    console.log(args.forEach((item) => console.log(item)))
-    //20
-    //30
-    //40
-}
-shallowCP(20,30,40)
-```
-
----
-
 [⬆️ Back to Contents](#Table-of-Contents)
 
 ## Scope Chain
@@ -1234,104 +1188,6 @@ data(number, array, getData)
 ```
 
 ---
-
-[⬆️ Back to Contents](#Table-of-Contents)
-
-## Asynchronous
-* Callback
-* Promise(ES6)
-* Async / Await
-
-
-### Callback
-1. wash hands
-2. eat dinner
-3. studying
-
-```javascript
-function todo(callback) {
-    console.log("studying")
-    callback
-}
-
-function eat(callback) {
-    console.log("eat dinner")
-    callback
-}
-
-function study() {
-    console.log("wash hands")
-}
-
-todo(eat(study()))
-/*
-studying
-eat dinner
-wash hands
-*/
-```
-
-### Promise
-* `ES6新增之語法`
-* `callback(resolve, reject)`
-* `status`
-    * `pendding`
-    * `resolve`
-    * `reject` 
-* `action` 都是負責接收promise
-    * `then 接受一個 callback(res)`
-    * `catch 抓住 reject 並且接受一個callback(error)`
-
-在上面callback的例子,相信不難發現如果callback越來越多就會難以閱讀
-```javascript
-todo(eat(study(todo(eat(study())))))
-```
-
-而我們使用promise取代callback
-
-```javascript
-function getStatus() {
-    return new Promise(function(resolve, reject) {
-    let num = true
-    if(num) {
-        resolve("Success status: 200")
-    } 
-    reject("Error status: 500")
-})
-}
-
-const result = getStatus()
-console.log(result);// Promise { 'Success status: 200' }
-
-result.then(function(response){
-    console.log(response); //Success status: 200
-})
-
-result.catch((error) => console.log(error))
-```
-
-### Async / Await
-* `promise語法糖,跟promise是互相搭配`
-* `async定義function`
-* `await等待promise`
-
-
-```javascript
-function getStatus() {
-    return new Promise(function(resolve, reject) {
-        // ...block
-    }
-}
-
-async function outputData() {
-    let data = await getStatus()
-    let result = await data.json()
-    return result
-}
-outputData()
-```
----
-
 [⬆️ Back to Contents](#Table-of-Contents)
 
 ## Prototype
@@ -1521,142 +1377,6 @@ class copyUser extends User {
 const user = new copyUser('Dennis', 22, "test@gmail.com", "JINWAN")
 copyUser.say()//static
 user.say()//user.say is not a function
-```
-
----
-
-[⬆️ Back to Contents](#Table-of-Contents)
-
-## Import / Export 
-在以前JavaScript並不需要分割成太多的檔案,但現在功能越多越複雜,全部攪在一起會導致維護困難
-
-於是JavaScript有了多樣化的檔案匯入方式
-* Common JS(Node.js)
-* ES6 module(官方統一標準)
-
-
-### Common JS
-* `Keywords`
-    * `module`
-    * `exports`
-    * `require`
-
-
-```javascript
-// commonEx.js
-module.exports.data = {
-    value: 2,
-}
-module.exports.fuc = function (params) {
-    console.log("Hello commonJS");
-}
-
-//commonIm.js
-const result = require('./commonEx')
-console.log(result);
-//{ data: { value: 2 }, fuc: [Function (anonymous)] }
-```
-
-### ES6 Modules
-* `keywords`
-    * `import` 
-    * `export`
-    * `default`
-    * `fileName.mjs`
-
-我們先來看如果在沒有package安裝套件的情況下,檔名沒有更改成`.mjs`
-```javascript
-//esExport.js
-const data = {
-    value: 2
-}
-
-const sayHi = function() {
-    console.log("Hello ES6");
-}
-
-export{
-    data, sayHi
-}
-
-
-//esImport.js
-import {data, sayHi} from './esExport.js'
-console.log(data);
-//Error: Cannot find module '/Users/zhengyanzhong/Note-JS/modules/esImport.mjs'
-```
-
-更改成`.mjs`
-
-```javascript
-//esExport.mjs
-const data = {
-    value: 2
-}
-
-const sayHi = function() {
-    console.log("Hello ES6");
-}
-
-export{
-    data, sayHi
-}
-//esImport.mjs
-import {data, sayHi} from './esExport.mjs'
-console.log(data);
-//{ value: 2 }
-```
-
-如果我們只有匯出一個模組,可以使用`default`設為該檔的預設
-
-```javascript
-
-//esExport.mjs
-const data = {
-    value: 2
-}
-export default data
-```
-
-import 即可不加大括號
-
-```javascript
-//esImport.mjs
-import data from './esExport.mjs'
-console.log(data);
-//{ value: 2 }
-```
-
----
-
-[⬆️ Back to Contents](#Table-of-Contents)
-
-## Fetch
-[MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
-
-```javascript
-  async function register(event) {
-    event.preventDefault()
-    await fetch('http://localhost:3001/register', {
-      headers: {
-        'Content-Type':'application/json', 
-      }, 
-      method: "POST",
-      body: JSON.stringify({
-        userName: user.userName,
-        passWord: user.passWord,
-        email: user.email,
-        country: user.country
-      })})    
-    alert('successful')
-    setUser({...user,
-      userName: "",
-      passWord: "",
-      email: "",
-      country: "Taiwan"
-    })
-    router('/user/signin')
-  }
 ```
 
 ---
