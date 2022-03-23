@@ -372,7 +372,8 @@ JavaScript ECMAScript 2015(ES6) 是非常重要的版本,由於ES6解決了之�
 * [Parameter](#parameter)
 * [Promise](#promise)
 * [Fetch](#fetch)
-
+* [Proxy](#proxy)
+  
 ---
 
 ## Class
@@ -691,6 +692,54 @@ postData('https://example.com/answer', { answer: 42 })
     router('/user/signin')
   }
 ```
+---
+[⬆️ Back to ES6](#es6) 
+
+## Proxy
+proxy是ES6新增的代理方式
+```javascript
+new Proxy(target, handler)
+```
+[handler methods](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
+
+
+```javascript
+const object = {name: "Dennis"}
+const copyA = new Proxy(object, {
+    get: (obj, prop) => console.log(obj, prop)
+})
+copyA.name //{ name: 'Dennis' } name
+```
+我們使用proxy來建立一個例子,透過copyA去代理object執行相關動作
+```javascript
+const object = {name: "Dennis"}
+const copyA = new Proxy(object, {
+    get: (obj, property) => {
+        return property in obj ? obj[property] : 'null'
+    }
+})
+console.log(copyA.user, copyA.name);// null Dennis
+```
+proxy代理更改object數值
+
+```javascript
+const object = {name: "Dennis"}
+const copyA = new Proxy(object, {
+    get: (obj, property) => {
+        return property in obj ? obj[property] : 'null'
+    },
+    set: (object, property, value) => {
+        return object[property] = value
+    }
+})
+console.log(copyA.user, copyA.name);// null Dennis
+copyA.user = 3
+console.log(copyA.user, copyA.name);// 3 Dennis
+copyA.name = 'IAN'
+console.log(copyA.user, copyA.name);// 3 IAN
+
+```
+
 ---
 [⬆️ Back to ES6](#es6) [⬆️ Back to Contents Tables](#table-of-contents)
 
