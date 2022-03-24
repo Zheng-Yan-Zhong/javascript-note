@@ -1,29 +1,14 @@
-//* 使用指向之方式達成存取
-//* 避免被垃圾回收機制回收
-
-//! scope chain
-let name = "Ian" //Ian
-a()
-function a() {
-    let name = "Dennis"
-    b()
-}
-function b() {
-    console.log(name);
+function counter() {
+  var count = 0;
+  //建立私有變數
+  return function (x) {
+    //利用return 把function傳出去
+    count += x;
+    return count;
+    //最後再把值回傳
+  };
 }
 
-
-//! closure
-
-function a() {
-    let count = 0
-    return function b() {
-        count++;
-        console.log(count);
-        return count
-    }
-}
-
-const result = a()
-result()
-result()
+const countFn = counter();
+const result = countFn(5);
+console.log(result);
