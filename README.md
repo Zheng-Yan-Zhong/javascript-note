@@ -1228,6 +1228,11 @@ counter(); //2
 
 這樣做的壞處在於只要全域變數中有一樣的 count,就會造成命名衝突.
 
+接著我們把 function 當作回傳值
+
+- countFn 會接住 counter()
+- counterFn 就會指向裡面的 anonymous function
+
 ```javascript
 function counter() {
   var count = 0;
@@ -1238,6 +1243,26 @@ function counter() {
     return count;
     //最後再把值回傳
   };
+}
+
+const countFn = counter();
+const result = countFn(5);
+console.log(result);
+```
+
+當然你也可以定義好函式再回傳
+
+```javascript
+function counter() {
+  var count = 0;
+  //建立私有變數
+  function inner(x) {
+    count += x;
+    return count;
+    //最後再把值回傳
+  }
+  return inner;
+  //利用return 把function傳出去
 }
 
 const countFn = counter();

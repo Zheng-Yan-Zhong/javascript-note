@@ -1,12 +1,13 @@
 function counter() {
   var count = 0;
   //建立私有變數
-  return function (x) {
-    //利用return 把function傳出去
+  function inner(x) {
     count += x;
     return count;
     //最後再把值回傳
-  };
+  }
+  return inner;
+  //利用return 把function傳出去
 }
 
 const countFn = counter();
