@@ -4,6 +4,8 @@
 
 > 或是 `e-mail` : `ococo09000@gmail.com`
 
+> 同步於"https://hackmd.io/K07_sinJS52I0t4M3gVqQQ"
+
 ---
 
 ## Table of Contents
@@ -406,11 +408,11 @@ console.log(result) //16
 | ++            | 先遞增再賦值 | x = 10, result = ++x | result = 11, x = 11 |
 | (decrease) -- | 先賦值再遞減 | x = 10, result = x-- | result = 10, x = 9  |     |
 | --            | 先遞減再賦值 | x = 10, result = --x | result = 9, x = 9   |
-| (cube)\*\*    | 該數的立方   | 3 \*\* 5             | 243                 |
+| (cube) \* \*  | 該數的立方   | 3 \* \* 5            | 243                 |
 
 ---
 
-[⬆️ Back to Opeatators](#operators) [⬆️ Back to Contents](#table-of-contents)
+[⬆️ Back to Opeatators](#operators)[⬆️ Back to Contents](#table-of-contents)
 
 ## ES6
 
