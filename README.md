@@ -22,6 +22,8 @@
 - [Closure](#Closure)
 - [Callback](#Callback)
 - [Prototype](#Prototype)
+- [BOM & DOM](#bom--dom)
+- [Web APIs](#web-apis)
 - [Regular-Expression](#Regular-Expression)
 
 ## Declaration
@@ -1447,143 +1449,46 @@ console.log(user.__proto__ === User.prototype); //true
 
 [⬆️ Back to Contents](#Table-of-Contents)
 
-## Class
+## BOM & DOM
 
-- `prototype sugar syntax`
-- `keywords`
-  - `class`
-  - `constructor`
-  - `super`
-  - `extends`
-  - `static`
-  - `getter`、`setter`
+BOM(Browser Object Model)也就是所謂的瀏覽器視窗
 
-首先我們定義一個 class User
+properties:
 
-```javascript
-class User {}
+- screen.width
+- screen.height
+- screen.availWidth
+- screen.availHeight
+- screen.colorDepth
+- screen.pixelDepth
+
+DOM(Document Object Model)是掌管 HTML element 的物件
+
+而 DOM 是依據 W3C 所定義,每個 HTML element 都是節點
+
+可以看到 html 是 head 和 body 的父節點
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root">add</div>
+    <script src="./let.js"></script>
+  </body>
+</html>
 ```
 
-定義其建構子
+---
 
-```javascript
-class User {
-  constructor(name, age, email) {
-    this.name = name;
-    this.age = age;
-    this.email = email;
-  }
-}
-```
+[⬆️ Back to Contents](#Table-of-Contents)
 
-給予 class User method
-
-```javascript
-class User {
-  constructor(name, age, email) {
-    this.name = name;
-    this.age = age;
-    this.email = email;
-  }
-
-  sayHi() {
-    console.log(`Helo I'm ${this.name}`);
-  }
-}
-```
-
-使用 `new` 建構
-
-```javascript
-const user = new User('Dennis', 22, 'test@gmail.com');
-
-user.sayHi(); //Helo I'm Dennis
-```
-
-而為什麼會說 class 其實是原型的語法糖
-
-我們把 user 打印出來看看
-
-![](images/class.png)
-
-本質還是使用原型的方式,只是如果本身有學習過 OOP 的話,ES6 的語法更親近不少
-
-`extends`
-物件導向會需要繼承類別達到目的
-
-```javascript
-class User {
-  constructor(name, age, email) {
-    this.name = name;
-    this.age = age;
-    this.email = email;
-  }
-
-  sayHi() {
-    console.log(`Helo I'm ${this.name}`);
-  }
-}
-
-class copyUser extends User {
-  constructor(name, age, email, background) {
-    this.background = background;
-    super(name, age, email);
-  }
-  intro() {
-    console.log(
-      `I'm ${this.name} graduated from ${this.background} and ${this.age} old`
-    );
-  }
-}
-```
-
-而事實上 這樣是錯誤的
-
-> ReferenceError: Must call super constructor in derived class before accessing 'this' or returning from derived constructor
-
-錯誤報告說 function super 也就是幫助我們繼承類別的屬性時,function super 必須在本身的屬性之上
-
-```javascript
-class copyUser extends User {
-  constructor(name, age, email, background) {
-    super(name, age, email);
-    this.background = background;
-  }
-  intro() {
-    console.log(
-      `I'm ${this.name} graduated from ${this.background} and ${this.age} old`
-    );
-  }
-}
-```
-
-恭喜！！！ 我們已經學會基本的繼承跟類別了
-
-`static`
-
-static 很間單易了,只要在類別方法前面加上`static`即可只讓類別本身使用
-
-```javascript
-class copyUser extends User {
-  constructor(name, age, email, background) {
-    super(name, age, email);
-    this.background = background;
-    //ReferenceError: Must call super constructor in derived class before accessing 'this' or returning from derived constructor
-  }
-  static say() {
-    console.log('static');
-  }
-  intro() {
-    console.log(
-      `I'm ${this.name} graduated from ${this.background} and ${this.age} old`
-    );
-  }
-}
-
-const user = new copyUser('Dennis', 22, 'test@gmail.com', 'JINWAN');
-copyUser.say(); //static
-user.say(); //user.say is not a function
-```
+## Web APIs
 
 ---
 
