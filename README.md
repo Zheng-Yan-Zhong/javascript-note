@@ -1,4 +1,4 @@
-# JavaScript-Note
+# Javascript note📕
 
 > 首先很感謝大家觀看我筆記,如果有什麼需要修正的請 issue
 
